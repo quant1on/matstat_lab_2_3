@@ -4,10 +4,11 @@ import numpy as np
 from scipy import stats
 from scipy.stats import variation
 from statistics import mode
+from typing import List, Union
 
 
 # Генерация выборки распределения Бернулли
-def bernoulli(n, p, size=1000):
+def bernoulli(n: int, p: float, size: int = 1000) -> np.ndarray:
     """
     :param n: Количество испытаний в каждом эксперименте
     :param p: Вероятность успеха при каждом испытании
@@ -19,7 +20,7 @@ def bernoulli(n, p, size=1000):
 
 
 # Генерация выборки эскпоненциального распределения
-def exponential(scale, size=1000):
+def exponential(scale: float, size: int = 1000) -> np.ndarray:
     """
     :param scale: Масштаб (1/lambda)
     :param size: Размер выборки
@@ -30,7 +31,7 @@ def exponential(scale, size=1000):
 
 
 # Вычисление квартилей
-def quantiles(part, data):
+def quantiles(part: List[float], data: np.ndarray) -> np.ndarray:
     """
     :param part: Список квантилей, которые хотим рассчитать
     :param data: Данные на вход
@@ -41,7 +42,7 @@ def quantiles(part, data):
 
 
 # Вычисление и вывод мер центральной тенденции
-def central_stats(data, dist_name):
+def central_stats(data: np.ndarray, dist_name: str) -> None:
     """
 
     :param data: Данные на вход
@@ -72,7 +73,7 @@ def central_stats(data, dist_name):
 
 
 #Вычисление и вывод мер вариабельности
-def variabiliyy_stats(data, dist_name):
+def variabiliyy_stats(data: np.ndarray, dist_name: str) -> None:
     """
 
     :param data: Данные на вход
@@ -108,7 +109,7 @@ def variabiliyy_stats(data, dist_name):
     print(f"• Среднее абсолютное отклонение (MAD) = {mad:.4f}")
 
 # Вычисление и вывод мер форм распределения
-def distribution_shape_stats(data, dist_name):
+def distribution_shape_stats(data: np.ndarray, dist_name: str) -> None:
     """
 
     :param data: Данные на вход
@@ -137,8 +138,14 @@ def distribution_shape_stats(data, dist_name):
         moment = stats.moment(data, moment=k)
         print(f"• μ_{k} = {moment:.4f}")
 
+
 # Построение графиков распределения
-def plot_distributions(data, dist_name, dist_type, params):
+def plot_distributions(
+    data: np.ndarray,
+    dist_name: str,
+    dist_type: str,
+    params: dict
+) -> None:
     """
 
     :param data: Данные на вход
@@ -223,7 +230,12 @@ def plot_distributions(data, dist_name, dist_type, params):
 
 
 # Добавление выбросов в данные
-def add_outliers(data, outlier_percent, dist_type, params):
+def add_outliers(
+    data: np.ndarray,
+    outlier_percent: float,
+    dist_type: str,
+    params: dict
+) -> np.ndarray:
     """
 
     :param data: Изначальные данные на вход
@@ -249,7 +261,12 @@ def add_outliers(data, outlier_percent, dist_type, params):
     return data_with_outliers
 
 # Функция для анализа устойчивости характеристик к выбросам
-def robustness_analysis(data, dist_name, dist_type, params):
+def robustness_analysis(
+    data: np.ndarray,
+    dist_name: str,
+    dist_type: str,
+    params: dict
+) -> None:
     """
 
     :param data: Данные на вход
