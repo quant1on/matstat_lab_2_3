@@ -178,7 +178,7 @@ def plot_distributions(data, dist_name, dist_type, params):
         unique, counts = np.unique(data, return_counts=True)
         probs = counts / len(data)
         plt.subplot(2, 1, 1)
-        plt.stem(unique, probs, use_line_collection=True)
+        plt.stem(unique, probs)
 
         # Теоретическая PMF
         if dist_name == "Биномиальное":
@@ -256,6 +256,7 @@ def robustness_analysis(data, dist_name, dist_type, params):
     :param dist_name: Название распределения
     :param dist_type: Тип распределения
     :param params: Параметры распределения
+    :return:
     """
     # Исходные статистики
     print("\n" + "=" * 50)
@@ -311,10 +312,6 @@ def robustness_analysis(data, dist_name, dist_type, params):
     plt.tight_layout()
     plt.suptitle(f"Изменение мер вариабельности для {dist_name}", y=1.02, fontsize=14)
     plt.show()
-
-
-data_exp = np.random.exponential(scale=2.0, size=1000)
-robustness_analysis(data_exp, "Экспоненциальное", "exponential", {'scale': 2.0})
 
 
 
